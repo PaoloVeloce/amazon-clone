@@ -1,0 +1,26 @@
+{
+  "name": "amazonclone",
+  "version": "1.0.0",
+  "description": "Ecommerce website",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
+    "nodemon": "^1.9.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PaoloVeloce/amazon-clone.git"
+  },
+  "author": "Pavel Dragoon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PaoloVeloce/amazon-clone/issues"
+  },
+  "homepage": "https://github.com/PaoloVeloce/amazon-clone#readme"
+}
