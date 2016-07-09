@@ -19,7 +19,7 @@ mongoose.connect('mongodb://root:1QaZ2WsX3EdC@ds017185.mlab.com:17185/amazonclon
 });
 
 
-app.use(express.static('__dirname' + '/public'));
+app.use(express.static(__dirname + '/public'));
 // middleware - will log all user requests to the server
 app.use(morgan('dev'));
 // middleware - express app could parse json data
