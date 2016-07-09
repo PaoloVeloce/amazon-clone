@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
 var Schema = mongoose.Schema;
 
 /* the user schema attributes / characteristics / fields */
@@ -19,13 +19,25 @@ var UserSchema = new Schema({
     // item: { type: Schema.Types.ObjectId, ref: ''}
   }]
 });
-
-
-
 /* hash the password before we even ave it to database */
 
-
-
-
+UserSchema.pre('save', function(next) {
+  var user = this;
+  if (!user.isModified('password')) return next();
+  // salt is something which presented as crypted data
+  bcrypt.genSalt(10, function(err, salt) {
+    if (err) return next(err);
+    bcrypt.hash(user.password, salt, null, function(err, hash) {
+      if (err) return next(err);
+      user.password = hash;
+      next();
+    });
+  });
+});
 
 /* compare password in database and the one that user type in */
+UserSchema.methods.comparePassword = function(password) {
+  return bcrypt.compareSync(password, this.password);
+};
+
+module.exports = mongoose.model('User', UserSchema);
