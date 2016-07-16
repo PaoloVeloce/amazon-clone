@@ -8,6 +8,9 @@ var engine = require('ejs-mate');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var flash = require('express-flash');
+var MongoStore = require('connect-mongo')(session);
+var passport = require('passport');
+
 
 var secret = require('/config/secret');
 var User = require('./models/user');
@@ -33,7 +36,8 @@ app.use(cookieParser());
 app.use(session({
   resave: true,
   saveUninitialized: true,
-  secret: secretKey
+  secret: secretKey,
+  store: new MongoStore({ url: secret.database, autoReconnect: true})
 }));
 app.use(flash());
 
