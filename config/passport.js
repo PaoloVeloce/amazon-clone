@@ -1,5 +1,6 @@
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy();
+var LocalStrategy = require('passport-local').Strategy;
+var User = require('../models/user');
 
 
 // serialize and deserialize
@@ -35,8 +36,8 @@ passport.use('local-login', new LocalStrategy({
 
 
 // custom function to validate
-exports.isAuthenticated = functiom(req, res, next) {
-  if (req.sAuthenticated()) {
+exports.isAuthenticated = function(req, res, next) {
+  if (req.isAuthenticated()) {
     return next();
   }
   res.redirect('/login');

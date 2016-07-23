@@ -12,7 +12,7 @@ var MongoStore = require('connect-mongo')(session);
 var passport = require('passport');
 
 
-var secret = require('/config/secret');
+var secret = require('./config/secret');
 var User = require('./models/user');
 
 var app = express();
@@ -36,10 +36,17 @@ app.use(cookieParser());
 app.use(session({
   resave: true,
   saveUninitialized: true,
-  secret: secretKey,
+  secret: secret.secretKey,
   store: new MongoStore({ url: secret.database, autoReconnect: true})
 }));
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+// every route will have user by default
+app.use(function(req, res, next) {
+  res.locals.user = req.user;
+  next();
+});
 
 
 
