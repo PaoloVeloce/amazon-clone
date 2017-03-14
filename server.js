@@ -67,10 +67,12 @@ app.set('view engine', 'ejs'); // use ejs engine
 var mainRoutes = require('./routes/main');
 var userRoutes = require('./routes/user');
 var adminRoutes = require('./routes/admin');
+var apiRoutes = require('./api/api');
 // middleware - say node that routes here - can be like '/paolo', mainRoutes
 app.use(mainRoutes);
 app.use(userRoutes);
 app.use(adminRoutes);
+app.use('/api', apiRoutes);
 
 
 // running simpliest server
